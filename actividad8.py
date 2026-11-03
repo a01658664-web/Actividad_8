@@ -1,5 +1,5 @@
 
-# Actividad 8 – Regresión NO Lineal
+# Actividad 8 Regresión NO Lineal
 
 
 
@@ -53,10 +53,9 @@ PATRON_EXCLUIR = re.compile(
     re.IGNORECASE,
 )
 
-# %% [markdown]
-# ## 1. Carga de las bases de datos
 
-# %%
+#  Carga de las bases de datos
+
 def limpiar_nombre(texto):
     return re.sub(r"\s+", " ", str(texto)).strip()
 
@@ -132,8 +131,8 @@ print(f"Tablas cargadas: {len(tablas_originales)}")
 for nombre, df in tablas_originales.items():
     print(f"  - {nombre}: {df.shape[0]} filas x {df.shape[1]} columnas")
 
-# %% [markdown]
-# Preprocesamiento: nulos, outliers y transformaciones
+
+# Preprocesamiento de nulos, outliers y transformaciones
 
 
 def a_numerico(serie):
@@ -214,7 +213,7 @@ def preprocesar(df):
         df[c] = df[c].clip(bajo, alto)
     info["outliers_acotados"] = total_outliers
 
-    # Transformaciones: log(1+x) para variables con sesgo fuerte
+    # Transformaciones de log(1+x) para variables con sesgo fuerte
     transformadas = []
     for c in variables:
         if df[c].min() >= 0 and abs(df[c].skew()) > 1:
@@ -236,7 +235,7 @@ for nombre, df in tablas_originales.items():
           f"{len(info['variables'])} variables numéricas útiles")
 
 
-# 3. Selección de variables y modelos de Regresión No Lineal
+#Selección de variables y modelos de Regresión No Lineal
 #
 # Modelo 1 – Polinomial de 2° grado:**  y = a·x² + b·x + c
 
@@ -334,7 +333,7 @@ else:
 print(f"Pares de variables a analizar: {len(pares)}")
 
 
-# 4. Ajuste de modelos y tabla de coeficientes
+# Ajuste de modelos y tabla de coeficientes
 
 
 rng = np.random.default_rng(SEMILLA)
@@ -390,7 +389,7 @@ if not resultados.empty:
 else:
     print("No se encontraron pares de variables numéricas para analizar.")
 
-# 5. Gráficas
+# Gráficas
 
 
 rutas_graficas = []
@@ -417,7 +416,7 @@ for i, (nombre, xcol, ycol, x, y, predicciones) in enumerate(ajustes, start=1):
     rutas_graficas.append(ruta)
 print(f"Gráficas guardadas: {len(rutas_graficas)} en {GRAFICAS}")
 
-# 6. Reporte comparativo en PDF
+# Reporte comparativo en PDF
 
 
 def corto(texto, n=28):
